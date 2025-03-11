@@ -16,6 +16,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
+        // allows for Jitpack Repos (we use SecuredAndroidPersist library on that repo)
+        maven(url = "https://jitpack.io")
     }
 }
 
