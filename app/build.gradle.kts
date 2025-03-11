@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -22,9 +24,19 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // add your API_KEY (if your app needs one) inside the "local.properties" file
+    // example:
+    // API_KEY=abcdefg12345
+    val apiKey = gradleLocalProperties(project.rootDir, providers).getProperty("API_KEY")
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix = ".debug"
+            configureDebugBuildType(apiKey)
             isMinifyEnabled = false
+        }
+        release {
+            configureReleaseBuildType(apiKey)
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -40,6 +52,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -99,4 +112,14 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+private fun com.android.build.api.dsl.BuildType.configureDebugBuildType(apiKey: String) {
+    buildConfigField("String", "API_KEY_MOVIES", "\"$apiKey\"")
+    buildConfigField("String", "BASE_URL_MOVIES", "\"https://api.themoviedb.org\"")
+}
+
+private fun com.android.build.api.dsl.BuildType.configureReleaseBuildType(apiKey: String) {
+    buildConfigField("String", "API_KEY_MOVIES", "\"$apiKey\"")
+    buildConfigField("String", "BASE_URL_MOVIES", "\"https://api.themoviedb.org\"")
 }
