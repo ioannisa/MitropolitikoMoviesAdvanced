@@ -2,7 +2,7 @@ package eu.anifantakis.mitropolitikomoviesadvanced.core.presentation.design
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -17,7 +17,7 @@ object Icons {
     // Icons from material design
     val favoriteOutlined: ImageVector
         @Composable
-        get() = Icons.Outlined.Favorite
+        get() = Icons.Filled.FavoriteBorder
 
     val favoriteFilled: ImageVector
         @Composable

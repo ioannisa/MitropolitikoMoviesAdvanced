@@ -3,9 +3,11 @@ package eu.anifantakis.mitropolitikomoviesadvanced.di.core
 import eu.anifantakis.lib.securepersist.PersistManager
 import eu.anifantakis.mitropolitikomoviesadvanced.AppApplication
 import eu.anifantakis.mitropolitikomoviesadvanced.BuildConfig
+import eu.anifantakis.mitropolitikomoviesadvanced.core.presentation.design.components.scaffold.ScaffoldViewModel
 import kotlinx.coroutines.CoroutineScope
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val appModule = module {
@@ -18,4 +20,6 @@ val appModule = module {
     single<CoroutineScope> {
         (androidApplication() as AppApplication).applicationScope
     }
+
+    viewModelOf(::ScaffoldViewModel)
 }
