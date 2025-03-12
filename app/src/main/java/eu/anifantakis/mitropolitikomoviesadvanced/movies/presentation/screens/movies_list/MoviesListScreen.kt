@@ -58,7 +58,7 @@ fun MoviesListScreenRoot(
 }
 
 @Composable
-fun MoviesListScreen(
+private fun MoviesListScreen(
     state: MoviesListState,
     onAction: (MoviesListIntent) -> Unit,
 ) {
