@@ -1,5 +1,6 @@
 package eu.anifantakis.mitropolitikomoviesadvanced.movies.presentation.screens.movies_list
 
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import eu.anifantakis.mitropolitikomoviesadvanced.core.presentation.utils.toComposeState
@@ -10,9 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import androidx.compose.runtime.getValue
 import java.util.Date
-import kotlin.Int
 
 class MoviesListViewModel: ViewModel() {
 
@@ -29,7 +28,7 @@ class MoviesListViewModel: ViewModel() {
     fun onAction(action: MoviesListIntent) {
         when (action) {
             is MoviesListIntent.LoadMovies -> loadMovies()
-            is MoviesListIntent.SelectMovie -> selectMovie(action.movieId)
+            is MoviesListIntent.SelectMovie -> selectMovie(action.movie)
         }
     }
 
@@ -53,14 +52,9 @@ class MoviesListViewModel: ViewModel() {
         }
     }
 
-    private fun selectMovie(movieId: Int) {
-        val movie = state.movies.firstOrNull { it.id == movieId }
-        _state.update { it.copy(selectedMovie = movie) }
-
-        movie?.let { movie ->
-            viewModelScope.launch {
-                effectChannel.send(MoviesListEffect.GotoMovieDetails(movie.id))
-            }
+    private fun selectMovie(movie: Movie) {
+        viewModelScope.launch {
+            effectChannel.send(MoviesListEffect.GotoMovieDetails(movie))
         }
     }
 }

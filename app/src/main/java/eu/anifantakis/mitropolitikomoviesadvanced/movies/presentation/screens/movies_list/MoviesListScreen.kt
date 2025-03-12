@@ -24,14 +24,13 @@ import java.util.Date
 
 @Composable
 fun MoviesListScreenRoot(
-    onNavigateToMovieDetails: (Int) -> Unit,
+    onNavigateToMovieDetails: (Movie) -> Unit,
     viewModel: MoviesListViewModel = koinViewModel()
 ) {
     ObserveEffects(viewModel.effects) { effect ->
         when (effect) {
             is MoviesListEffect.GotoMovieDetails -> {
-                if (effect.movieId > 0)
-                    onNavigateToMovieDetails(effect.movieId)
+                onNavigateToMovieDetails(effect.movie)
             }
             else -> { }
         }
@@ -78,7 +77,7 @@ fun MoviesListScreen(
                     movie = movie,
                     modifier = Modifier
                         .clickable {
-                            onAction(MoviesListIntent.SelectMovie(movie.id))
+                            onAction(MoviesListIntent.SelectMovie(movie))
                         }
                 )
             }
