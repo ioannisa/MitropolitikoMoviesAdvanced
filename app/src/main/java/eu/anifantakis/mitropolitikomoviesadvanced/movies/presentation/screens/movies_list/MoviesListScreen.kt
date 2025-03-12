@@ -48,7 +48,7 @@ fun MoviesListScreenRoot(
         ) {
             MoviesListScreen(
                 state = viewModel.state,
-                onAction = {}
+                onAction = viewModel::onAction
             )
 
             if (viewModel.state.isLoading) {

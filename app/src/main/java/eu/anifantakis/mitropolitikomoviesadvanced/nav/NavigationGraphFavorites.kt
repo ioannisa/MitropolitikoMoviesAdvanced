@@ -11,16 +11,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import kotlinx.serialization.Serializable
 
-sealed interface FavoriteMoviesNavType {
-    @Serializable data object MoviesList: FavoriteMoviesNavType
-    @Serializable data class SelectedMovie(val id: Int): FavoriteMoviesNavType
+sealed interface FavoriteMoviesRoute {
+    @Serializable data object MoviesList: FavoriteMoviesRoute
+    @Serializable data class SelectedMovie(val id: Int): FavoriteMoviesRoute
 }
 
 fun NavGraphBuilder.favoriteMoviesGraph(navController: NavHostController) {
     navigation<NavGraph.FavoriteMovies>(
-        startDestination = FavoriteMoviesNavType.MoviesList,
+        startDestination = FavoriteMoviesRoute.MoviesList,
     ) {
-        composable<FavoriteMoviesNavType.MoviesList> {
+        composable<FavoriteMoviesRoute.MoviesList> {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center,

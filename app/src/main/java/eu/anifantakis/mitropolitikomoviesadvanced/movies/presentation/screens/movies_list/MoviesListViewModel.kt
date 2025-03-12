@@ -56,5 +56,11 @@ class MoviesListViewModel: ViewModel() {
     private fun selectMovie(movieId: Int) {
         val movie = state.movies.firstOrNull { it.id == movieId }
         _state.update { it.copy(selectedMovie = movie) }
+
+        movie?.let { movie ->
+            viewModelScope.launch {
+                effectChannel.send(MoviesListEffect.GotoMovieDetails(movie.id))
+            }
+        }
     }
 }
