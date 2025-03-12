@@ -117,9 +117,11 @@ dependencies {
 private fun com.android.build.api.dsl.BuildType.configureDebugBuildType(apiKey: String) {
     buildConfigField("String", "API_KEY_MOVIES", "\"$apiKey\"")
     buildConfigField("String", "BASE_URL_MOVIES", "\"https://api.themoviedb.org\"")
+    buildConfigField("String", "BASE_URL_MOVIE_IMAGE", "\"https://image.tmdb.org\"")
 }
 
 private fun com.android.build.api.dsl.BuildType.configureReleaseBuildType(apiKey: String) {
     buildConfigField("String", "API_KEY_MOVIES", "\"$apiKey\"")
     buildConfigField("String", "BASE_URL_MOVIES", "\"https://api.themoviedb.org\"")
+    buildConfigField("String", "BASE_URL_MOVIE_IMAGE", "\"https://image.tmdb.org\"")
 }

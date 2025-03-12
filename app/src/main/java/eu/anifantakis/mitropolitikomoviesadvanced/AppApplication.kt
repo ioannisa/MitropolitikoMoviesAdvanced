@@ -2,6 +2,7 @@ package eu.anifantakis.mitropolitikomoviesadvanced
 
 import android.app.Application
 import eu.anifantakis.mitropolitikomoviesadvanced.di.core.appModule
+import eu.anifantakis.mitropolitikomoviesadvanced.di.movies.moviesModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
@@ -21,7 +22,7 @@ class AppApplication: Application() {
 
         startKoin {
             androidContext(this@AppApplication)
-            modules(appModule)
+            modules(appModule, moviesModule)
         }
     }
 }
